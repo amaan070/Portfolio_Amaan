@@ -2,13 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_portfolio/common/splash/light_splash.dart';
-import 'package:my_portfolio/features/dashboard/views/dashboard2.dart';
 import 'package:my_portfolio/features/authentication/services/authentication_service.dart';
 import 'package:my_portfolio/common/themes/dark_theme.dart';
 import 'package:my_portfolio/common/firebase_options.dart';
 import 'package:my_portfolio/common/themes/light_theme.dart';
 import 'package:my_portfolio/features/authentication/controllers/obscure_provider.dart';
-import 'package:my_portfolio/features/authentication/views/login_page.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
