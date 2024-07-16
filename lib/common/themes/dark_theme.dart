@@ -56,8 +56,8 @@ final ThemeData customDarkTheme = ThemeData(
     )),
     outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-      padding: WidgetStatePropertyAll(
-          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0)),
+      padding: const WidgetStatePropertyAll(
+          EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0)),
       textStyle: WidgetStatePropertyAll(GoogleFonts.spaceGrotesk(fontSize: 14)),
       foregroundColor: WidgetStatePropertyAll(Colors.black),
       backgroundColor: WidgetStatePropertyAll(Colors.white),
