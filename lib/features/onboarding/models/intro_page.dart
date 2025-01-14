@@ -2,6 +2,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_portfolio/common/widgets/animated_heading.dart';
+import 'package:my_portfolio/common/widgets/animated_sub_heading.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({
@@ -76,9 +78,17 @@ class IntroPageState extends State<IntroPage> {
                   ),
                   Column(
                     children: [
-                      animatedSubHeadingText(widget.subHeadingText),
+                      AnimatedSubHeading(
+                        subHeadingText: widget.subHeadingText,
+                        durn: widget.durn,
+                        fontSize: 28,
+                      ),
                       _showHeadingText
-                          ? animatedHeadingText(widget.headingText)
+                          ? AnimatedHeading(
+                              headingText: widget.headingText,
+                              durn: widget.durn,
+                              fontSize: 36,
+                            )
                           : SizedBox(
                               height: widget.headingHeight,
                               width: 60,
@@ -101,50 +111,5 @@ class IntroPageState extends State<IntroPage> {
             )
           ],
         ));
-  }
-
-  Widget animatedSubHeadingText(String subHeadingText) {
-    return SizedBox(
-      width: 250.0,
-      child: DefaultTextStyle(
-        style: GoogleFonts.spaceGrotesk(
-            fontWeight: FontWeight.bold, fontSize: 28, color: Colors.white),
-        child: AnimatedTextKit(
-          totalRepeatCount: 1,
-          animatedTexts: [
-            TypewriterAnimatedText(subHeadingText,
-                speed: Duration(milliseconds: widget.durn),
-                textAlign: TextAlign.center),
-          ],
-          onTap: () {},
-        ),
-      ),
-    );
-  }
-
-  Widget animatedHeadingText(String headingText) {
-    const colorizeColors = [
-      Colors.blue,
-      Color.fromARGB(255, 113, 230, 117),
-    ];
-
-    var colorizeTextStyle =
-        GoogleFonts.spaceGrotesk(fontWeight: FontWeight.bold, fontSize: 36);
-
-    return SizedBox(
-      width: 250.0,
-      child: AnimatedTextKit(
-        pause: const Duration(milliseconds: 1000),
-        repeatForever: true,
-        animatedTexts: [
-          ColorizeAnimatedText(headingText,
-              textStyle: colorizeTextStyle,
-              colors: colorizeColors,
-              textAlign: TextAlign.center),
-        ],
-        isRepeatingAnimation: true,
-        onTap: () {},
-      ),
-    );
   }
 }

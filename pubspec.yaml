@@ -52,6 +52,9 @@ dependencies:
   dio: ^5.5.0
   path_provider: ^2.1.3
   open_file: ^3.3.2
+  youtube_player_flutter: ^9.0.1
+  url_launcher: ^6.3.0
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -94,7 +97,12 @@ flutter:
     - assets/images/amaan_ahmad.png
     - assets/images/gdsc_sample.jpg
     - assets/images/calculator.jpg
+    - assets/images/calcul.jpg
     - assets/images/quiz.jpg
+    - assets/images/qui.jpg
+    - assets/images/gdsc/
+    - assets/images/calc/
+    - assets/images/quiz/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

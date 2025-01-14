@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_portfolio/features/projects/models/app_details.dart';
 import 'dart:math' as math;
+import 'package:my_portfolio/features/projects/views/app_details_page.dart';
 
 class SlidingCardsView extends StatefulWidget {
   const SlidingCardsView({
@@ -37,7 +39,6 @@ class _SlidingCardsViewState extends State<SlidingCardsView> {
     'assets/images/calculator.jpg',
     'assets/images/quiz.jpg',
   ];
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -45,7 +46,7 @@ class _SlidingCardsViewState extends State<SlidingCardsView> {
       child: PageView.builder(
         clipBehavior: Clip.none,
         controller: pageController,
-        itemCount: 3,
+        itemCount: descriptions.length,
         itemBuilder: (context, index) {
           // double offset = pageOffset - index;
 
@@ -103,17 +104,19 @@ class _SlidingCardsViewState extends State<SlidingCardsView> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            OutlinedButton(
-                              onPressed: () {},
-                              child: Text('Demo Video'),
-                            ),
-                            OutlinedButton(
-                                onPressed: () {}, child: Text('Source Code')),
-                          ],
-                        ),
+                        child: SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AppDetailsPage(
+                                              appDetails:
+                                                  appDetailsList[index])));
+                                },
+                                child: const Text('Explore'))),
                       ),
                       const SizedBox(
                         height: 0,

@@ -19,14 +19,15 @@ class ProjectsPage extends StatelessWidget {
             style: GoogleFonts.spaceGrotesk(fontSize: 16),
           )),
       body: ThemeBackground(
+          background_image: 'assets/images/light_background.png',
           child: Stack(
             children: <Widget>[
               SafeArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(height: 20),
-                    Center(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 55.0),
                       child: Text(
                         'Featured Projects',
                         style: GoogleFonts.spaceGrotesk(fontSize: 18),
@@ -40,8 +41,7 @@ class ProjectsPage extends StatelessWidget {
               ),
               ExhibitionBottomSheet(), //use this or ScrollableExhibitionSheet
             ],
-          ),
-          background_image: 'assets/images/light_background.png'),
+          )),
     );
   }
 }

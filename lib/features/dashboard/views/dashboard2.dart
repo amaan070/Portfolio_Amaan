@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +8,12 @@ import 'package:lottie/lottie.dart';
 import 'package:my_portfolio/common/widgets/theme_background.dart';
 import 'package:my_portfolio/features/authentication/services/authentication_service.dart';
 import 'package:my_portfolio/features/authentication/views/login_page.dart';
+import 'package:my_portfolio/features/github_repo/views/github_page.dart';
 import 'package:my_portfolio/features/projects/views/projects.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -22,6 +23,11 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  Future fetchTweet() async {
+    http.Response response;
+    response = await http.get(Uri.parse('uri'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -306,39 +312,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Find me on:',
-                        style: GoogleFonts.spaceGrotesk(
-                          fontSize: 16,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 45.0),
+                        child: Text(
+                          'Find me on:',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Icon(
-                            FontAwesomeIcons.github,
+                            FontAwesomeIcons.linkedin,
+                            size: 40,
+                          ),
+                          Icon(
+                            FontAwesomeIcons.instagram,
                             size: 40,
                           ),
                           Icon(
                             FontAwesomeIcons.twitter,
                             size: 40,
                           ),
-                          Icon(
-                            FontAwesomeIcons.linkedin,
-                            size: 40,
-                          ),
                         ],
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 20,
                       ),
                       SizedBox(
-                        height: 60,
-                        width: double.infinity,
+                        height: 50,
                         child: ElevatedButton(
-                          child: const Text('Contact Me.'),
-                          onPressed: () {},
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Look at my GitHub '),
+                              Icon(FontAwesomeIcons.github)
+                            ],
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const GithubPage()));
+                          },
                         ),
                       ),
                     ],
@@ -346,33 +366,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-
-            SliverToBoxAdapter(
-              child: Center(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Code is like humor. When you have to explain it, it’s probably bad.',
-                        style: GoogleFonts.spaceGrotesk(
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        '— Cory House',
-                        style: GoogleFonts.spaceGrotesk(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
             SliverToBoxAdapter(
               child: Center(
                 child: Padding(
@@ -383,7 +376,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Icon(
                         FontAwesomeIcons.copyright,
-                        size: 8,
+                        size: 9,
                         color: Colors.grey[700],
                       ),
                       const SizedBox(

@@ -7,6 +7,7 @@ import 'package:my_portfolio/common/themes/dark_theme.dart';
 import 'package:my_portfolio/common/firebase_options.dart';
 import 'package:my_portfolio/common/themes/light_theme.dart';
 import 'package:my_portfolio/features/authentication/controllers/obscure_provider.dart';
+import 'package:my_portfolio/features/github_repo/controllers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -15,12 +16,9 @@ void main() async {
   // Hide the status bar
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: [SystemUiOverlay.bottom]);
-
-  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   runApp(const MyApp());
 }
 
@@ -34,12 +32,13 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_) => AuthenticationService()),
           ChangeNotifierProvider(create: (_) => ObscureProvider()),
+          ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
         ],
         child: MaterialApp(
             title: 'Portfolio',
             theme: lightTheme,
             darkTheme: customDarkTheme,
-            themeMode: ThemeMode.light,
-            home: SplashLight()));
+            themeMode: ThemeMode.dark,
+            home: const SplashLight()));
   }
 }

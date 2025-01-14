@@ -1,8 +1,9 @@
 import 'dart:math' as math;
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_portfolio/features/projects/models/app_details.dart';
+import 'package:my_portfolio/features/projects/views/app_details_page.dart';
 
 const double minHeight = 120;
 const double iconStartSize = 44;
@@ -81,6 +82,7 @@ class _ExhibitionBottomSheetState extends State<ExhibitionBottomSheet>
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
+        bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
         return Positioned(
           height: lerp(minHeight, maxHeight),
           left: 0,
@@ -95,8 +97,10 @@ class _ExhibitionBottomSheetState extends State<ExhibitionBottomSheet>
               decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [
                   Theme.of(context).hoverColor,
-                  Theme.of(context).dividerColor
-                ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                  Theme.of(context)
+                      .dividerColor
+                      .withOpacity(isDarkTheme ? 0.85 : 0.8)
+                ], begin: Alignment.centerLeft, end: Alignment.centerRight),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
               ),
               child: Stack(
@@ -148,6 +152,7 @@ class _ExhibitionBottomSheetState extends State<ExhibitionBottomSheet>
       borderRadius: itemBorderRadius,
       title: event.title,
       date: event.date,
+      index: index,
     );
   }
 
@@ -183,6 +188,7 @@ class ExpandedEventItem extends StatelessWidget {
   final double borderRadius;
   final String title;
   final String date;
+  final int index;
 
   const ExpandedEventItem(
       {super.key,
@@ -192,7 +198,8 @@ class ExpandedEventItem extends StatelessWidget {
       required this.borderRadius,
       required this.title,
       required this.date,
-      required this.leftMargin});
+      required this.leftMargin,
+      required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -210,40 +217,47 @@ class ExpandedEventItem extends StatelessWidget {
             color: Colors.grey[900],
           ),
           padding: EdgeInsets.only(left: height).add(const EdgeInsets.all(8)),
-          child: _buildContent(context),
+          child: _buildContent(context, index),
         ),
       ),
     );
   }
 
-  Widget _buildContent(BuildContext context) {
+  Widget _buildContent(BuildContext context, int index) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Text(title,
             style: GoogleFonts.spaceGrotesk(fontSize: 20, color: Colors.white)),
-        Row(
-          children: <Widget>[
-            Text(
-              '1 ticket',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 12,
-                color: Colors.grey[500],
-              ),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              date,
+        Text(
+          date,
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 12,
+            color: Colors.grey[500],
+          ),
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          AppDetailsPage(appDetails: appDetailsList[index])));
+            },
+            child: Text(
+              'Explore',
               style: const TextStyle(
                 fontWeight: FontWeight.w300,
                 fontSize: 12,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
-          ],
-        ),
+          ),
+        )
       ],
     );
   }
